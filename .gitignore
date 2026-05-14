@@ -1,0 +1,7 @@
+venv/
+__pychache__/
+.env
+.pytest_cache/
+.idea/
+.vscode/
+chromadb/
