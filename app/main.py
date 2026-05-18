@@ -1,15 +1,14 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
-import os
+
+from app.api.routes.rag import router as rag_router
+
+load_dotenv()
 
 app = FastAPI(title="GenAI RAG Assistant")
 
 @app.get("/")
 def home():
-    return {"message":"GenAI RAG Assistant is running"}
+    return {"message": "GENAI RAG Assistant is running"}
 
-load_dotenv()
-
-api_key = os.getenv("OPENAI_API_KEY")
-
-print(api_key)
+app.include_router(rag_router)
