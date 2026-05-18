@@ -9,3 +9,4 @@ openai
 tiktoken
 pytest
 httpx
+sentence-transformers
