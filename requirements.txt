@@ -10,3 +10,4 @@ tiktoken
 pytest
 httpx
 sentence-transformers
+python-multipart

@@ -17,6 +17,13 @@ def ask_question(question: str):
     
     docs = retriever.invoke(question)
 
+    # Extract unique source names from metadata
+    sources = []
+    for doc in docs:
+        source = doc.metadata.get("source", "unknown")
+        if source not in sources:
+            sources.append(source)
+
     context = "\n\n".join([doc.page_content for doc in docs])
 
     prompt = f"""
@@ -30,6 +37,10 @@ def ask_question(question: str):
     """
 
     response = llm.invoke(prompt)
-    return response
+    return {
+        "answer": response,
+        "sources": sources
+    }
+
 
 
