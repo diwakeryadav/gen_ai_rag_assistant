@@ -32,7 +32,20 @@ export default function UploadPanel() {
       if (fileInput) fileInput.value = "";
     } catch (err) {
       console.error(err);
-      const errMsg = err.response?.data?.detail || "Failed to upload file.";
+      let errMsg = "Failed to upload file.";
+      if (err.response?.data?.detail) {
+        if (typeof err.response.data.detail === "string") {
+          errMsg = err.response.data.detail;
+        } else if (Array.isArray(err.response.data.detail)) {
+          errMsg = err.response.data.detail.map(d => d.msg).join(", ");
+        } else {
+          errMsg = JSON.stringify(err.response.data.detail);
+        }
+      } else if (err.message) {
+        errMsg = err.message === "Network Error"
+          ? "Network Error: Cannot connect to the backend server. Make sure it is running on port 8000."
+          : err.message;
+      }
       setError(errMsg);
       setMessage("");
     } finally {

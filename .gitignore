@@ -1,7 +1,9 @@
+.venv/
 venv/
-__pychache__/
+__pycache__/
 .env
 .pytest_cache/
 .idea/
 .vscode/
-chromadb/
+chroma_db/
+data/

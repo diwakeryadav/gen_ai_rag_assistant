@@ -1,20 +1,11 @@
-from langchain_chroma import Chroma
-from app.services.embedding_service import get_embeddings_model
+from app.services.vector_store import get_vector_store
 from app.services.llm_service import get_llm
-
-embedding_model = get_embeddings_model()
-
-vector_store = Chroma (
-    persist_directory = "chroma_db",
-    embedding_function = embedding_model
-)
-
-retriever = vector_store.as_retriever(search_kwargs={"k":3})
 
 llm = get_llm()
 
 def ask_question(question: str):
-    
+    vector_store = get_vector_store()
+    retriever = vector_store.as_retriever(search_kwargs={"k":3})
     docs = retriever.invoke(question)
 
     # Extract unique source names from metadata

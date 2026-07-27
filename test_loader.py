@@ -2,7 +2,7 @@ from app.services.document_loaders import load_pdf
 from app.services.text_splitter import split_documents
 from app.services.vector_store import create_vector_store
 
-docs = load_pdf("data/sample.pdf")
+docs = load_pdf("data/Diwaker_Yadav_Resume_Optimized.pdf")
 
 chunks = split_documents(docs)
 
